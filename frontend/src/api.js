@@ -2,7 +2,8 @@ import axios from "axios";
 
 // Injected at build/runtime via env var — points to the ALB DNS/API path.
 // e.g. https://api.yourdomain.com or http://<alb-dns-name>/api
-const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
+//const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
+const API_BASE_URL = process.env.REACT_APP_API_URL || ""; //relative
 
 const client = axios.create({
   baseURL: API_BASE_URL,
