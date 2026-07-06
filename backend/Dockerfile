@@ -1,9 +1,11 @@
+# stage 1 - build required softwares/tools
 FROM python:3.12-slim AS builder
 
 WORKDIR /build
 COPY requirements.txt .
 RUN pip install --no-cache-dir --user -r requirements.txt
 
+# stage 2
 FROM python:3.12-slim
 
 # Security: run as non-root (Security pillar)

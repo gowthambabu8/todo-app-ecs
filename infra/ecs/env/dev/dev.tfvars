@@ -1,0 +1,11 @@
+project-name="todo"
+env = "dev"
+backend_container_port = 8000
+backend_cpu = 256
+backend_memory = 512
+backend_image = "105673693772.dkr.ecr.us-east-1.amazonaws.com/todo-backend:backend"
+frontend_container_port = 80
+frontend_cpu = 256
+frontend_memory = 512
+frontend_image = "105673693772.dkr.ecr.us-east-1.amazonaws.com/todo-frontend:frontend"
+aws_region = "us-east-1"
