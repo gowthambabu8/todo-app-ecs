@@ -2,8 +2,8 @@ resource "aws_lb" "this" {
     name = "${var.project-name}-${var.env}"
     internal = false
     load_balancer_type = "application"
-    security_groups = ["sg-039f2f88a9646303d"]
-    subnets = [ "subnet-0a4e27a2a916214d9","subnet-07a0a99fff792d43b" ]
+    security_groups = local.alb_sg_id
+    subnets = local.public_subnets
     tags = {
         Name = "${var.project-name}"
         Environment = "${var.env}"
@@ -15,7 +15,7 @@ resource "aws_lb_target_group" "frontend" {
   target_type = "ip"
   protocol = "HTTP"
   port = "80"
-  vpc_id = "vpc-08330044d1c982a06"
+  vpc_id = local.vpc_id
 
   health_check {
     path = "/health"
@@ -37,7 +37,7 @@ resource "aws_lb_target_group" "backend" {
   target_type = "ip"
   protocol = "HTTP"
   port = "8000"
-  vpc_id = "vpc-08330044d1c982a06"
+  vpc_id = local.vpc_id
 
   health_check {
     path = "/health"
