@@ -2,7 +2,7 @@ resource "aws_lb" "this" {
     name = "${var.project-name}-${var.env}"
     internal = false
     load_balancer_type = "application"
-    security_groups = local.alb_sg_id
+    security_groups = [local.alb_sg_id]
     subnets = local.public_subnets
     tags = {
         Name = "${var.project-name}"
