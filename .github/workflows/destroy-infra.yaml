@@ -1,4 +1,4 @@
-name: Roboshop Infra AWS - Destroy
+name: Todo Infra AWS - Destroy
 on:
   workflow_dispatch:
     inputs:

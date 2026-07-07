@@ -1,4 +1,4 @@
-name: Roboshop Infra AWS - Create
+name: Todo Infra AWS - Create
 on:
   workflow_dispatch:
     inputs:
