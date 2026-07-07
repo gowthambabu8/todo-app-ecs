@@ -16,8 +16,16 @@ env:
   TF_VERSION: 1.15.1
 
 jobs:
+  rds:
+    name: rds
+    uses: ./.github/workflows/terraform-reusable-destroy.yaml
+    with:
+      service-name: rds
+      working-directory: ./infra/rds/env/dev/
+    secrets: inherit
   ecs:
     name: ecs
+    needs: rds
     uses: ./.github/workflows/terraform-reusable-destroy.yaml
     with:
       service-name: ecs
