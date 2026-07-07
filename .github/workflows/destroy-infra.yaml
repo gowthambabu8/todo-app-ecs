@@ -16,30 +16,30 @@ env:
   TF_VERSION: 1.15.1
 
 jobs:
-  rds:
-    name: rds
+  ecs:
+    name: ecs
     uses: ./.github/workflows/terraform-reusable-destroy.yaml
     with:
-      service-name: rds
-      working-directory: ./40-rds/dev/
+      service-name: ecs
+      working-directory: ./infra/ecs/env/dev/
     secrets: inherit
 
-  bastion:
-    name: Bastion
-    needs: rds
+  alb:
+    name: alb
+    needs: ecs
     uses: ./.github/workflows/terraform-reusable-destroy.yaml
     with:
-      service-name: bastion
-      working-directory: ./30-bastion/dev/
+      service-name: alb
+      working-directory: ./infra/alb/env/dev/
     secrets: inherit
     
   sg-rules:
     name: SG Rules
-    needs: bastion
+    needs: alb
     uses: ./.github/workflows/terraform-reusable-destroy.yaml
     with:
       service-name: sg-rules
-      working-directory: ./20-sg-rules/dev/
+      working-directory: ./infra/sg-rules/env/dev/
     secrets: inherit
 
   sg:
@@ -48,7 +48,7 @@ jobs:
     uses: ./.github/workflows/terraform-reusable-destroy.yaml
     with:
       service-name: sg
-      working-directory: ./10-sg/dev/
+      working-directory: ./infra/sg/env/dev/
     secrets: inherit
   
   vpc:
@@ -57,5 +57,5 @@ jobs:
     uses: ./.github/workflows/terraform-reusable-destroy.yaml
     with:
       service-name: vpc
-      working-directory: ./00-vpc/dev/
+      working-directory: ./infra/vpc/env/dev/
     secrets: inherit
