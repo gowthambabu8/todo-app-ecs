@@ -1,0 +1,61 @@
+name: Roboshop Infra AWS - Create
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "AWS Infra using Terraform"
+        required: true
+        default: "dev"
+        type: choice
+        options:
+          - "dev"
+          - "uat"
+          - "prod"
+env:
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  TF_VERSION: 1.15.1
+
+jobs:
+  vpc:
+    name: VPC
+    uses: ./.github/workflows/terraform-reusable-create.yaml
+    with:
+      service-name: vpc
+      working-directory: ./infra/vpc/env/dev/
+    secrets: inherit
+    
+  sg:
+    name: SG
+    needs: vpc
+    uses: ./.github/workflows/terraform-reusable-create.yaml
+    with:
+      service-name: sg
+      working-directory: ./infra/sg/env/dev/
+    secrets: inherit
+    
+  sg-rules:
+    name: SG Rules
+    needs: sg
+    uses: ./.github/workflows/terraform-reusable-create.yaml
+    with:
+      service-name: sg-rules
+      working-directory: ./infra/sg-rules/env/dev/
+    secrets: inherit
+  
+  alb:
+    name: ALB
+    needs: sg-rules
+    uses: ./.github/workflows/terraform-reusable-create.yaml
+    with:
+      service-name: sg-rules
+      working-directory: ./infra/alb/env/dev/
+    secrets: inherit
+  
+  ecs:
+    name: ECS
+    needs: sg-rules
+    uses: ./.github/workflows/terraform-reusable-create.yaml
+    with:
+      service-name: alb
+      working-directory: ./infra/alb/env/dev/
+    secrets: inherit
