@@ -47,15 +47,15 @@ jobs:
     needs: sg-rules
     uses: ./.github/workflows/terraform-reusable-create.yaml
     with:
-      service-name: sg-rules
+      service-name: alb
       working-directory: ./infra/alb/env/dev/
     secrets: inherit
   
   ecs:
     name: ECS
-    needs: sg-rules
+    needs: alb
     uses: ./.github/workflows/terraform-reusable-create.yaml
     with:
-      service-name: alb
-      working-directory: ./infra/alb/env/dev/
+      service-name: ecs
+      working-directory: ./infra/ecs/env/dev/
     secrets: inherit
