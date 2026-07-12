@@ -11,8 +11,12 @@ on:
                     - "dev"
                     - "uat"
                     - "prod"
+# workflow level
+# job level
+# step level
 
 jobs:
+
     debug_job:
         runs-on: ubuntu-latest
         steps:
@@ -23,6 +27,9 @@ jobs:
                     sleep 60
             - name: print2
               run: echo "printingggg"
+            - name: accessing env variable
+              run: |
+                echo ${{ env.environment }}
     output_job:
         runs-on: ubuntu-latest
         needs: debug_job
