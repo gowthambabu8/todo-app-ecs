@@ -53,5 +53,7 @@ jobs:
             - name: accessing env variable
               run: |
                 echo ${{ env.DOCKERURL }}
-                echo "Job level variable - debug_job_priority :: ${{env.debug_job_priority}}"
+            - name: accessing env variable from previous job
+              run: |
+                echo ${{ needs.debug_job.outputs.stage }}
 
