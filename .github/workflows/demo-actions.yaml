@@ -24,7 +24,6 @@ jobs:
                 run: |
                     echo "Starting..."
                     echo "Ending"
-                    sleep 60
             - name: print2
               run: echo "printingggg"
             - name: accessing env variable
