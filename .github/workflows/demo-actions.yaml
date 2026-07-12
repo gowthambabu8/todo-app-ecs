@@ -35,6 +35,11 @@ jobs:
               run: |
                 echo ${{ env.DOCKERURL }}
                 echo "Job level variable - debug_job_priority :: ${{env.debug_job_priority}}"
+            - name: update github_output
+              id: setting
+              run: echo "stage=debug_job" >> $GITHUB_OUTPUT
+            - name: getting from github_output
+              run: echo ${{ steps.setting.outputs.stage }}
     output_job:
         runs-on: ubuntu-latest
         needs: debug_job
