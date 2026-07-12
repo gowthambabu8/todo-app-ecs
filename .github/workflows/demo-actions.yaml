@@ -22,4 +22,13 @@ jobs:
                     echo "Ending"
             - name: print2
               run: echo "printingggg"
+    output_job:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: output name
+                run: |
+                    echo "Name output"
+            -   name: output gender
+                run: |
+                    echo "Gender output"
 
