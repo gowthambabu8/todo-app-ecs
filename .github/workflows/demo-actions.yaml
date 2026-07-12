@@ -1,0 +1,25 @@
+name: Demo github actions file
+on:
+    workflow_dispatch: 
+        inputs:
+            environment:
+                description: Environment field.
+                required: true
+                default: "dev"
+                type: choice
+                options:
+                    - "dev"
+                    - "uat"
+                    - "prod"
+
+jobs:
+    debug_job:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: print
+                run: |
+                    echo "Starting..."
+                    echo "Ending"
+            - name: print2
+              run: echo "printingggg"
+
